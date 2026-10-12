@@ -1,0 +1,123 @@
+# ==========================================
+# 환경 변수 및 비밀 정보
+# ==========================================
+
+# 실제 환경 변수 파일은 Git에 올리지 않음
+.env
+.env.*
+
+# 팀원 공유용 예시 파일은 Git에 포함
+!.env.example
+
+# ==========================================
+# IDE 및 개발 도구 설정
+# ==========================================
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Eclipse 및 STS
+.project
+.classpath
+.settings/
+.apt_generated/
+.factorypath
+.springBeans
+.sts4-cache/
+
+# VS Code 개인 설정
+.vscode/
+
+# 기타 개발 도구
+.nbproject/private/
+.atom/
+.history/
+.svn/
+
+# ==========================================
+# 운영체제에서 생성하는 파일
+# ==========================================
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ==========================================
+# 프론트엔드 - Flutter / Dart
+# ==========================================
+
+# Dart 및 Flutter 의존성·캐시
+frontend/.dart_tool/
+frontend/.packages
+frontend/.flutter-plugins
+frontend/.flutter-plugins-dependencies
+frontend/.pub-cache/
+frontend/.pub/
+frontend/.metadata
+
+# 빌드 결과물 및 테스트 결과
+frontend/build/
+frontend/coverage/
+frontend/doc/api/
+
+# 코드 난독화 및 심볼 파일
+frontend/**/*.symbols
+frontend/**/*.map.json
+
+# Android 로컬 SDK 경로 및 빌드 파일
+frontend/android/local.properties
+frontend/android/.gradle/
+frontend/android/app/debug/
+frontend/android/app/profile/
+frontend/android/app/release/
+
+# iOS 빌드 정보
+frontend/ios/Flutter/.last_build_id
+
+# Flutter 작업용 임시 디렉터리
+frontend/.build/
+frontend/.buildlog/
+frontend/.widget_preview/
+frontend/migrate_working_dir/
+
+# ==========================================
+# 백엔드 - Java / Spring Boot / Gradle
+# ==========================================
+
+# Gradle 캐시 및 빌드 결과물
+backend/.gradle/
+backend/build/
+
+# Gradle Wrapper 실행 파일은 공유해야 하므로 제외하지 않음
+# backend/gradle/wrapper/gradle-wrapper.jar
+
+# ==========================================
+# 백엔드 - Maven
+# ==========================================
+
+# Maven 빌드 결과물
+backend/target/
+
+# ==========================================
+# 로그 및 임시 파일
+# ==========================================
+
+*.log
+*.class
+*.pyc
+*.swp
+
+# ==========================================
+# 기타 빌드 및 IDE 부산물
+# ==========================================
+
+bin/
+dist/
+nbbuild/
+nbdist/
+.nb-gradle/
+.factorypath
