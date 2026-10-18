@@ -27,6 +27,8 @@
 
 ## 시스템 구성
 
+![시스템 구조도](docs/images/sys-architecture.png)
+
 - Flutter 앱에서 Spring Boot REST API를 호출합니다.
 - Spring Boot 서버에서 인증, 게시글, 검색, 매칭 및 채팅 관련 로직을 처리합니다.
 - PostgreSQL에 사용자 및 서비스 데이터를 저장합니다.
