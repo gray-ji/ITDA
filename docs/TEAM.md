@@ -73,54 +73,67 @@ ITDA/
 │   └── workflows/
 │       └── ci.yml                  # GitHub Actions CI
 ├── frontend/                       # Flutter 모바일 앱
-│   ├── lib/
-│   │   ├── main.dart               # 앱 진입점
-│   │   ├── app.dart                # 앱 설정 및 최상위 위젯
-│   │   ├── core/                   # 앱 공통 기반 코드
-│   │   ├── shared/                 # 공통 UI 컴포넌트
-│   │   └── features/               # 기능별 코드
+│   ├── lib/                        # 앱 소스 코드
 │   ├── test/                       # Flutter 테스트 코드
 │   ├── pubspec.yaml                # 패키지 및 의존성 설정
 │   └── analysis_options.yaml       # Dart 정적 분석 설정
 ├── backend/                        # Spring Boot 서버
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/               # 애플리케이션 소스 코드
+│   │   │   └── resources/          # 애플리케이션 설정
+│   │   └── test/                   # 테스트 코드     
+│   └── build.gradle                # Gradle 빌드 설정
 ├── docs/                           # 프로젝트 문서
 ├── .env.example                    # 환경 변수 예시
 ├── docker-compose.yml              # 로컬 개발 환경
 └── README.md                       # 프로젝트 소개 및 실행 안내
 ```
 
-위 구조는 프로젝트의 기본 디렉터리 구성이다. 실제 구현 상황에 따라 필요한 파일과 하위 폴더를 추가한다.
+위 구조는 프로젝트의 기본 디렉터리 구성이다. 실제 구현 상황에 따라 필요한 파일과 하위 디렉터리를 추가한다.
 
-### 3.2 Flutter 폴더별 역할
+### 3.2 Flutter — lib 디렉터리 구성
 
-| 폴더 및 파일 | 역할 |
+| 디렉터리 및 파일 | 역할 |
 | --- | --- |
 | `main.dart` | 앱의 진입점 |
 | `app.dart` | 앱의 최상위 위젯 및 전반적인 설정 |
-| `core/` | API 통신, 라우팅, 테마, 공통 상수, 오류 처리 등 앱 전반의 기반 코드 |
-| `shared/` | 여러 기능에서 재사용하는 버튼, 입력창, 공통 위젯 등 |
+| `core/` | API 통신, 라우팅, 테마, 공통 상수, 오류 처리 |
+| `shared/` | 여러 기능에서 재사용하는 UI 컴포넌트 |
 | `features/` | 기능별 화면, 데이터 처리 및 관련 로직 |
-| `test/` | 공통 코드와 기능의 동작을 검증하는 테스트 코드 |
-| `pubspec.yaml` | Flutter 패키지 및 의존성 관리 |
-| `analysis_options.yaml` | Dart 정적 분석 규칙 설정 |
 
-### 3.3 기능별 폴더 구성
-
-`features/`는 기능 단위로 코드를 분리하며, 다음과 같이 구성한다.
+`features/`는 다음과 같이 구성한다.
 
 ```text
 features/
 ├── auth/          # 인증 관련 화면
 ├── home/          # 홈 화면
-├── posts/         # 게시글 관리
-├── search/        # 검색 및 필터링
-├── matching/      # 매칭 결과
-├── chat/          # 1:1 채팅
-├── returns/       # 반환 기록 및 반환 처리
-└── my_page/       # 마이페이지
+├── posts/         # 게시글 관리 및 매칭 화면
+├── search/        # 게시글 검색·필터링 화면
+├── chat/          # 채팅 관리 화면
+├── returns/       # 반환 상태 관리 화면
+└── my_page/       # 마이페이지 화면
 ```
 
-각 기능 폴더에는 구현에 필요한 경우 `screens/`, `models/`, `data/`, `widgets/` 등의 하위 폴더를 구성한다. 모든 폴더와 파일을 미리 생성하지 않고 실제 구현에 필요한 것부터 추가한다.
+각 기능 디렉터리의 하위 구조는 실제 구현에 필요한 경우에만 추가한다.
+
+### 3.3 Spring Boot — 패키지 구성
+
+```text
+com.itda/
+├── global/        # 공통 설정, 보안, 예외 및 응답 처리
+├── auth/          # 카카오 로그인 및 인증
+├── user/          # 사용자 정보 관리
+├── post/          # 게시글 관리
+├── search/        # 게시글 검색·필터링
+├── matching/      # 게시글 매칭
+├── chat/          # 채팅방 및 메시지 관리
+└── returnrecord/  # 반환 상태 관리
+```
+
+- 기능별 패키지에는 필요한 경우 Controller, Service, Repository, Entity, DTO 등을 구성한다.
+- 공통 설정 및 예외 처리 등 여러 기능에서 사용하는 코드는 `global/`에서 관리한다.
+- 실제 클래스와 세부 하위 패키지는 구현 시 필요한 범위에서 추가한다.
 
 ### 3.4 프론트엔드와 백엔드의 책임
 
