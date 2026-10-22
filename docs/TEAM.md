@@ -46,7 +46,7 @@ Squash and Merge
 | 게시글 목록·상세 조회 | Hyeon |
 | 게시글 검색·필터링 | Hyeon |
 | 게시글 매칭 | 공동 |
-| 반환 상태·기록 관리 | Hyeon |
+| 반환 상태 관리 | Hyeon |
 | 사용자 정보·게시글 관리 | Songhaney |
 | 채팅방·메시지 관리 | Songhaney 주도, Hyeon 협업 |
 | 메시지 푸시 알림 | Hyeon 주도, Songhaney 협업 |
@@ -106,11 +106,11 @@ ITDA/
 
 ```text
 features/
-├── auth/          # 인증 관련 화면
-├── home/          # 홈 화면
-├── posts/         # 게시글 관리 및 매칭 화면
-├── search/        # 게시글 검색·필터링 화면
-├── chat/          # 채팅 관리 화면
+├── auth/           # 카카오 로그인 및 인증
+├── home/           # 홈 화면 및 게시글 탐색
+├── posts/          # 게시글 등록·수정·삭제·상세
+├── search/         # 게시글 검색·필터링 및 최근 검색어 관리
+├── chat/           # 채팅방·메시지 관리
 ├── returns/       # 반환 상태 관리 화면
 └── my_page/       # 마이페이지 화면
 ```
@@ -123,16 +123,15 @@ features/
 com.itda/
 ├── global/        # 공통 설정, 보안, 예외 및 응답 처리
 ├── auth/          # 카카오 로그인 및 인증
-├── user/          # 사용자 정보 관리
+├── user/          # 프로필 및 계정 관리
 ├── post/          # 게시글 관리
 ├── search/        # 게시글 검색·필터링
 ├── matching/      # 게시글 매칭
-├── chat/          # 채팅방 및 메시지 관리
+├── chat/          # 채팅방·메시지 관리
 └── returnrecord/  # 반환 상태 관리
 ```
 
 - 기능별 패키지에는 필요한 경우 Controller, Service, Repository, Entity, DTO 등을 구성한다.
-- 공통 설정 및 예외 처리 등 여러 기능에서 사용하는 코드는 `global/`에서 관리한다.
 - 실제 클래스와 세부 하위 패키지는 구현 시 필요한 범위에서 추가한다.
 
 ### 3.4 프론트엔드와 백엔드의 책임
