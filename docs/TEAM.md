@@ -46,7 +46,7 @@ Squash and Merge
 | 게시글 목록·상세 조회 | Hyeon |
 | 게시글 검색·필터링 | Hyeon |
 | 게시글 매칭 | 공동 |
-| 반환 상태·기록 관리 | Hyeon |
+| 반환 상태 관리 | Hyeon |
 | 사용자 정보·게시글 관리 | Songhaney |
 | 채팅방·메시지 관리 | Songhaney 주도, Hyeon 협업 |
 | 메시지 푸시 알림 | Hyeon 주도, Songhaney 협업 |
@@ -127,7 +127,7 @@ com.itda/
 ├── user/          # 프로필 및 계정 관리
 ├── post/          # 게시글 관리, 검색·필터링
 ├── matching/      # 게시글 매칭
-├── chat/          # 채팅방 및 메시지 관리
+├── chat/          # 채팅방·메시지 관리
 └── returnrecord/  # 반환 상태 관리
 ```
 
