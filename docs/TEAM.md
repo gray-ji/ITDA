@@ -111,8 +111,8 @@ features/
 ├── posts/          # 게시글 등록·수정·삭제·상세
 ├── search/         # 게시글 검색·필터링 및 최근 검색어 관리
 ├── chat/           # 채팅방·메시지 관리
-├── notifications/  # 알림 처리 및 조회
-└── my_page/        # 마이페이지, 프로필 및 계정 관리, 반환 기록 관리
+├── notifications/  # 푸시 알림 수신·표시, FCM 토큰 관리
+└── my_page/        # 마이페이지, 프로필·계정 및 반환 기록 관리
 ```
 
 - 각 기능은 관련 화면과 해당 기능에 필요한 데이터 처리 및 로직을 관리한다.
@@ -127,8 +127,10 @@ com.itda/
 ├── user/          # 프로필 및 계정 관리
 ├── post/          # 게시글 관리, 검색·필터링
 ├── matching/      # 게시글 매칭
-├── chat/          # 채팅방·메시지 관리
-└── returnrecord/  # 반환 상태 관리
+├── chat/          # 채팅방 및 메시지 관리
+├── returnrecord/  # 반환 상태 관리
+├── notification/  # 푸시 알림 전송 관리
+└── devicetoken/   # FCM 기기 토큰 관리
 ```
 
 - 기능별 패키지에는 필요한 경우 Controller, Service, Repository, Entity, DTO 등을 구성한다.
