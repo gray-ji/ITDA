@@ -75,8 +75,8 @@
 | `user_id` | UUID | N | 게시글 작성자 ID |
 | `type` | VARCHAR(10) | N | 게시글 유형. `LOST`, `FOUND` |
 | `category` | VARCHAR(30) | N | 물건 카테고리. `4. 물건 카테고리 코드값 정의` 참조 |
-| `title` | VARCHAR(100) | N | 게시글 제목. 물건명과 동일 |
-| `feature` | TEXT | Y | 물건 특징 |
+| `title` | VARCHAR(100) | N | 게시글 제목 |
+| `description` | TEXT | Y | 물건 설명 |
 | `status` | VARCHAR(20) | N | 게시글 상태. `LOOKING`, `STORED`, `RETURNED` |
 | `occurred_from` | DATE | Y | 분실·습득 발생일 또는 추정 기간의 시작일 |
 | `occurred_to` | DATE | Y | 분실·습득 추정 기간의 종료일. NULL이면 종료일이 별도로 필요하지 않음을 의미 |
