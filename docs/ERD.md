@@ -13,7 +13,6 @@
 - 날짜와 시각은 각각 `DATE`, `TIMESTAMP`로 저장한다.
 - 이미지 파일은 Cloudinary에 저장하고, DB에는 Cloudinary의 이미지 식별자를 저장한다. 이미지 URL은 별도 컬럼에 저장하지 않는다.
 - 최근 검색어는 프론트엔드에서 관리하며, 데이터베이스에 저장하지 않는다.
-- 본 문서에 정의한 제약 조건은 실제 DB 스키마에도 반영한다.
 
 ## 3. 테이블 명세
 
@@ -81,7 +80,7 @@
 | `occurred_from` | DATE | Y | 분실·습득 발생일 또는 추정 기간의 시작일 |
 | `occurred_to` | DATE | Y | 분실·습득 추정 기간의 종료일. NULL이면 종료일이 별도로 필요하지 않음을 의미 |
 | `location` | VARCHAR(100) | N | 분실·습득 장소 |
-| `created_at` | TIMESTAMP | N | 게시글 작성 시각 및 기본 정렬 기준 |
+| `created_at` | TIMESTAMP | N | 작성 시각 및 기본 정렬 기준 |
 | `updated_at` | TIMESTAMP | N | 마지막 수정 시각 |
 | `deleted_at` | TIMESTAMP | Y | 논리 삭제 시각. NULL이면 삭제되지 않은 게시글 |
 
@@ -95,13 +94,6 @@
 | CHECK | `category` | 정의된 카테고리 저장값만 허용 |
 | CHECK | `status` | `LOOKING`, `STORED`, `RETURNED`만 허용 |
 | CHECK | (`occurred_from`, `occurred_to`) | 종료일이 지정된 경우 시작일도 필수이며, 종료일은 시작일보다 빠를 수 없음 |
-
-#### 이미지 관리 기준
-
-- 이미지가 없는 게시글도 등록할 수 있다.
-- 게시글 이미지는 최대 5장까지 등록할 수 있다.
-- 이미지 표시 순서는 `post_images.sort_order`로 관리하며 첫 번째 이미지를 대표 이미지로 사용한다.
-- 이미지 개수 제한은 여러 행에 걸친 검증이므로 애플리케이션 서비스 계층에서 검증한다.
 
 #### 인덱스
 
@@ -130,6 +122,10 @@
 | UNIQUE | `public_id` | Cloudinary 이미지 식별자의 중복 등록 방지 |
 | 복합 UNIQUE | (`post_id`, `sort_order`) | 동일 게시글 내 이미지 순서 중복 방지 |
 
+#### 이미지 관리 기준
+
+- 이미지 개수 제한은 여러 행에 걸친 검증이므로 애플리케이션 서비스 계층에서 검증한다.
+
 ### 3.5. image_deletion_tasks
 
 이미지 삭제 작업을 관리한다. DB에서 이미지 정보가 삭제되더라도 Cloudinary 삭제에 실패한 작업을 보존하고 재시도할 수 있도록 한다.
@@ -140,8 +136,8 @@
 | `public_id` | VARCHAR(100) | N | 삭제할 Cloudinary 이미지 식별자 |
 | `status` | VARCHAR(20) | N | 삭제 상태. `PENDING`, `COMPLETED`, `FAILED` |
 | `retry_count` | INTEGER | N | 삭제 재시도 횟수. 기본값 0 |
-| `created_at` | TIMESTAMP | N | 삭제 작업 생성 시각 |
-| `updated_at` | TIMESTAMP | N | 작업 상태 변경 시각 |
+| `created_at` | TIMESTAMP | N | 생성 시각 |
+| `updated_at` | TIMESTAMP | N | 마지막 변경 시각 |
 
 #### 제약 조건
 
@@ -219,7 +215,7 @@
 | `sender_id` | UUID | N | 메시지를 보낸 사용자 ID |
 | `content` | VARCHAR(1000) | Y | 텍스트 메시지 내용. 이미지 메시지에서는 NULL |
 | `public_id` | VARCHAR(100) | Y | Cloudinary 이미지 식별자. `itda/chats/{UUID}` 형식. 텍스트 메시지에서는 NULL |
-| `created_at` | TIMESTAMP | N | 메시지 작성 시각 및 채팅 메시지 정렬 기준 |
+| `created_at` | TIMESTAMP | N | 작성 시각 및 채팅 메시지 정렬 기준 |
 
 #### 제약 조건
 
@@ -239,38 +235,30 @@
 
 ### 3.8. return_records
 
-분실물과 습득물의 반환 완료 및 취소 이력을 관리한다. 취소된 반환 기록도 삭제하지 않고 이력으로 보존한다.
+분실물과 습득물의 반환 완료 및 취소 이력을 관리한다. 반환 기록은 채팅방에 연결하며, 사용자 및 게시글 정보는 연결된 채팅방을 통해 조회한다. 취소된 반환 기록도 삭제하지 않고 이력으로 보존한다.
 
 | 컬럼 | 타입 | NULL | 설명 |
 |---|---|---|---|
 | `id` | UUID | N | PK, UUID v7 |
-| `lost_user_id` | UUID | N | 실제 분실자 사용자 ID |
-| `found_user_id` | UUID | N | 실제 습득자 사용자 ID |
-| `lost_post_id` | UUID | Y | 관련 분실물 게시글 ID. 해당 게시글이 없으면 NULL |
-| `found_post_id` | UUID | Y | 관련 습득물 게시글 ID. 해당 게시글이 없으면 NULL |
+| `chat_id` | UUID | N | 반환이 진행된 채팅방 ID |
 | `status` | VARCHAR(10) | N | 반환 상태. `COMPLETED`, `CANCELED` |
-| `created_at` | TIMESTAMP | N | 반환 기록 생성 시각. 반환 완료 처리 시각과 동일 |
+| `created_at` | TIMESTAMP | N | 생성 시각. 반환 완료 처리 시각과 동일 |
 | `updated_at` | TIMESTAMP | N | 마지막 수정 시각 |
-| `canceled_at` | TIMESTAMP | Y | 반환 기록 취소 시각. 취소 전에는 NULL |
+| `canceled_at` | TIMESTAMP | Y | 취소 시각. 취소 전에는 NULL |
 
 #### 제약 조건
 
 | 유형 | 대상 | 설명 |
 |---|---|---|
 | PK | `id` | 반환 기록 식별자 |
-| FK | `lost_user_id` | `users.id` 참조 |
-| FK | `found_user_id` | `users.id` 참조 |
-| FK | `lost_post_id` | `posts.id` 참조 |
-| FK | `found_post_id` | `posts.id` 참조 |
-| CHECK | (`lost_user_id`, `found_user_id`) | 분실자와 습득자는 서로 다른 사용자여야 함 |
-| CHECK | (`lost_post_id`, `found_post_id`) | 두 게시글 ID가 모두 NULL인 반환 기록은 허용하지 않음 |
+| FK | `chat_id` | `chats.id` 참조 |
 | CHECK | `status` | `COMPLETED`, `CANCELED`만 허용 |
 
 #### 데이터 관리 기준
 
-- 실제 반환 당사자의 사용자 정보를 기록하며, 존재하는 게시글만 반환 기록에 연결한다.
+- 반환 당사자와 관련 게시글은 연결된 `chats`의 `lost_user_id`, `found_user_id`, `lost_post_id`, `found_post_id`를 기준으로 확인한다.
 - 취소된 반환 기록도 삭제하지 않고 이력으로 보존한다.
-- 같은 당사자가 다시 반환을 진행하면 기존 기록을 재사용하지 않고 새로운 반환 기록을 생성한다.
+- 같은 채팅방에서 반환이 다시 진행되면 기존 기록을 재사용하지 않고 새로운 반환 기록을 생성한다. 따라서 `chat_id`에는 UNIQUE 제약 조건을 적용하지 않는다.
 
 ### 3.9. notifications
 
@@ -288,7 +276,7 @@
 | `type` | VARCHAR(20) | N | 알림 목록 항목 유형. `RETURN_COMPLETED`, `RETURN_CANCELED` |
 | `content` | VARCHAR(120) | N | 사용자에게 표시할 알림 내용 |
 | `is_read` | BOOLEAN | N | 읽음 여부. 기본값 `FALSE` |
-| `created_at` | TIMESTAMP | N | 알림 생성 시각 |
+| `created_at` | TIMESTAMP | N | 생성 시각 |
 
 #### 제약 조건
 
