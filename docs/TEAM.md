@@ -140,7 +140,7 @@ com.itda/
 
 - **Flutter:** 화면 구성, 사용자 입력 처리, API 연동 및 서버 응답 표시
 - **Spring Boot:** API 제공, 인증·인가, 비즈니스 로직 처리, 데이터베이스 연동 및 외부 서비스 연계
-- **공통:** API 규격과 데이터 형식은 [API](api.yaml)를 기준으로 협의
+- **공통:** API 규격과 데이터 형식은 [API](https://3uznoxlhxz.apidog.io)를 기준으로 협의
 
 ---
 
