@@ -15,5 +15,21 @@ services:
       timeout: 5s
       retries: 5
 
+  itda-redis:
+    image: redis:7-alpine
+    command: ["sh", "-c", "redis-server --requirepass \"$${REDIS_PASSWORD}\""]
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    ports:
+      - "${REDIS_PORT}:6379"
+    volumes:
+      - itda-redis-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$${REDIS_PASSWORD}\" --no-auth-warning ping | grep PONG"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
 volumes:
   itda-postgres-data:
+  itda-redis-data:
