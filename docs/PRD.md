@@ -279,6 +279,7 @@ MVP 완성과 배포를 우선하며, 후순위 기능은 일정이 확보된 �
 | 프론트엔드 | Flutter, Dart | 모바일 앱 |
 | 백엔드 | Java 21, Spring Boot | REST API 및 서비스 로직 |
 | 데이터베이스 | PostgreSQL | 사용자·게시글·반환 기록·채팅 데이터 |
+| 토큰 저장소 | Redis | Refresh Token 저장 및 관리 |
 | 이미지 저장소 | Cloudinary | 게시글 및 채팅 이미지 저장·조회 |
 | 푸시 알림 | Firebase Cloud Messaging | 메시지 푸시 알림 |
 | CI | GitHub Actions | 자동 빌드 및 테스트 |
@@ -288,6 +289,10 @@ MVP 완성과 배포를 우선하며, 후순위 기능은 일정이 확보된 �
 ### 7.2 시스템 구성
 
 Flutter 앱은 REST API를 호출하고, Spring Boot 서버는 PostgreSQL을 통해 사용자·게시글·반환 기록·채팅 데이터를 관리한다.
+
+**인증 토큰 관리**
+- Refresh Token은 Redis에 저장하고 관리한다.
+- Refresh Token의 만료 및 갱신·삭제 정책은 세부 설계 문서에서 정의한다.
 
 **이미지 저장**
 

@@ -17,8 +17,6 @@
 - **반환 상태 관리:** 반환 완료 처리, 반환 기록 조회, 반환 기록 취소 및 관련 게시글 상태 복구
 - **마이페이지:** 프로필, 내 게시글, 반환 기록 및 실제 반환 상대 정보 확인
 
-매칭은 실제 소유자를 확정하는 기능이 아니라, 사용자가 확인해야 할 관련 게시글을 추천하는 기능입니다.
-
 로그인을 제외한 모든 서비스 기능은 로그인 사용자만 이용할 수 있습니다.
 
 ## 기술 스택
@@ -28,6 +26,7 @@
 | Frontend | Flutter, Dart | 모바일 애플리케이션 |
 | Backend | Java 21, Spring Boot | REST API 및 서비스 로직 |
 | Database | PostgreSQL | 사용자, 게시글, 채팅, 반환 기록 저장 |
+| Token Storage | Redis | Refresh Token 저장 및 관리 |
 | Image Storage | Cloudinary | 게시글 및 채팅 이미지 저장 |
 | Push Notification | Firebase Cloud Messaging | 메시지 푸시 알림 |
 | CI | GitHub Actions | 자동 빌드 및 테스트 |
@@ -41,6 +40,7 @@
 - **Flutter:** 사용자 인터페이스와 사용자 입력을 처리하고 백엔드 REST API를 호출합니다.
 - **Spring Boot:** 카카오 인증 검증, 접근 권한 확인, 게시글 관리, 검색, 매칭 추천, 채팅 및 반환 기록 관련 로직을 처리합니다.
 - **PostgreSQL:** 사용자, 게시글, 채팅, 반환 기록 및 필요한 서비스 데이터를 저장합니다.
+- **Redis:** Refresh Token을 저장하고 관리합니다. 토큰 만료 및 로그아웃 처리에 활용합니다.
 - **Cloudinary:** 게시글과 채팅에 첨부된 이미지를 저장합니다. PostgreSQL에는 Cloudinary의 이미지 식별자를 저장하며, 이미지 조회에 필요한 URL은 서버에서 접근 권한을 확인한 뒤 처리합니다.
 - **Firebase Cloud Messaging:** 새 채팅 메시지가 도착하면 상대방에게 푸시 알림을 전송합니다. 푸시 전송은 메시지 저장과 분리해 처리합니다.
 - **GitHub Actions:** 변경된 파일 경로를 기준으로 필요한 백엔드 빌드·테스트 또는 프론트엔드 정적 분석·테스트를 실행합니다.
@@ -128,7 +128,7 @@ cp .env.example .env
 
 `.env` 파일에 로컬 개발 환경에 필요한 값을 설정합니다. 실제 환경 변수 이름과 필수 항목은 `.env.example` 및 백엔드 설정을 기준으로 확인합니다.
 
-#### PostgreSQL 실행
+#### PostgreSQL 및 Redis 실행
 
 프로젝트 루트에서 다음 명령어를 실행합니다.
 
@@ -197,6 +197,6 @@ flutter test
 
 ## 배포
 
-백엔드 및 데이터베이스는 Render를 이용해 배포하고, Flutter 앱과 배포된 API를 연동합니다.
+백엔드는 Render를 이용해 배포하며, PostgreSQL과 Redis를 연결합니다. Flutter 앱과 배포된 API를 연동합니다.
 
 배포 환경의 비밀값과 서비스별 설정은 환경 변수 등으로 관리하며, 민감한 인증 정보를 소스 코드에 포함하지 않습니다.
