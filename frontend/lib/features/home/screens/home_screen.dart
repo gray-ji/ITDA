@@ -94,9 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             // TODO: 검색 화면 연결
                           },
                         ),
-
                         const SizedBox(height: 24),
-
                         PostTypeTabs(
                           isFoundTab: isFoundTab,
                           onChanged: (isFound) {
@@ -167,9 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: AppColors.gray3,
             size: 42,
           ),
-
           const SizedBox(height: 12),
-
           const Text(
             '게시글이 없어요',
             style: TextStyle(

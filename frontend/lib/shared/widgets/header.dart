@@ -17,24 +17,33 @@ class Header extends StatelessWidget {
       child: SizedBox(
         height: 40,
         width: double.infinity,
-        child: Stack(
-          alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // 로고
-            Center(
-              child: Image.asset(
-                'assets/images/logo.png',
-                height: 44,
-                fit: BoxFit.contain,
-              ),
+            // 로고 + 앱 이름
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  'assets/images/logo.png',
+                  height: 40,
+                  fit: BoxFit.contain,
+                ),
+                const SizedBox(width: 8),
+                const Text(
+                  '잇다',
+                  style: TextStyle(
+                    fontFamily: 'Recipekorea',
+                    fontSize: 24,
+                    color: AppColors.black,
+                  ),
+                ),
+              ],
             ),
 
             // 알림 아이콘
-            Positioned(
-              right: 0,
-              child: _NotificationButton(
-                onTap: onNotificationTap,
-              ),
+            _NotificationButton(
+              onTap: onNotificationTap,
             ),
           ],
         ),
