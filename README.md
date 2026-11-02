@@ -70,7 +70,6 @@ ITDA/
 | [SCREEN](docs/SCREEN.md) | 화면 구성 및 사용자 이동 흐름 |
 | [ERD](docs/ERD.md) | 데이터베이스 구조 및 테이블 관계 |
 | [API](https://3uznoxlhxz.apidog.io) | Apidog 기반 API 공통 규칙 및 명세 |
-| [OpenAPI](docs/openapi.yaml) | OpenAPI 명세 파일 |
 | [MATCHING](docs/MATCHING.md) | 매칭 기준 및 점수 산정 규칙 |
 | [TEAM](docs/TEAM.md) | 팀 구성, 역할 및 협업 방식 |
 | [FLUTTER SETUP](docs/FLUTTER_SETUP.md) | Windows 기준 Flutter 개발 환경 구성 및 Android 앱 실행 |
