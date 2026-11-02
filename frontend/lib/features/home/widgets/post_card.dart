@@ -15,11 +15,11 @@ class PostCard extends StatelessWidget {
 
   Color get statusColor {
     switch (post.status) {
-      case Status.LOOKING:
+      case Status.looking:
         return AppColors.yellow;
-      case Status.STORED:
+      case Status.stored:
         return AppColors.blue;
-      case Status.RETURNED:
+      case Status.returned:
         return AppColors.gray1;
     }
   }

@@ -1,20 +1,20 @@
 enum Category {
-  ELECTRONICS,
-  WALLET_MONEY_ID,
-  FASHION,
-  DAILY_GOODS,
-  STATIONERY_BOOKS,
-  SPORTS_LEISURE,
-  BABY_GOODS,
-  PET_SUPPLIES,
-  FOOD,
-  OTHER,
+  electronics,
+  walletMoneyId,
+  fashion,
+  dailyGoods,
+  stationeryBooks,
+  sportsLeisure,
+  babyGoods,
+  petSupplies,
+  food,
+  other,
 }
 
 enum Status {
-  LOOKING,
-  STORED,
-  RETURNED,
+  looking,
+  stored,
+  returned,
 }
 
 class Post {
@@ -42,36 +42,36 @@ class Post {
 
   String get categoryLabel {
     switch (category) {
-      case Category.ELECTRONICS:
+      case Category.electronics:
         return '전자제품';
-      case Category.WALLET_MONEY_ID:
+      case Category.walletMoneyId:
         return '지갑/현금/신분증';
-      case Category.FASHION:
+      case Category.fashion:
         return '패션';
-      case Category.DAILY_GOODS:
+      case Category.dailyGoods:
         return '생활용품';
-      case Category.STATIONERY_BOOKS:
+      case Category.stationeryBooks:
         return '문구/도서';
-      case Category.SPORTS_LEISURE:
+      case Category.sportsLeisure:
         return '스포츠/레저';
-      case Category.BABY_GOODS:
+      case Category.babyGoods:
         return '유아용품';
-      case Category.PET_SUPPLIES:
+      case Category.petSupplies:
         return '반려동물용품';
-      case Category.FOOD:
+      case Category.food:
         return '식품';
-      case Category.OTHER:
+      case Category.other:
         return '기타';
     }
   }
 
   String get statusLabel {
     switch (status) {
-      case Status.LOOKING:
+      case Status.looking:
         return '찾는중';
-      case Status.STORED:
+      case Status.stored:
         return '보관중';
-      case Status.RETURNED:
+      case Status.returned:
         return '반환완료';
     }
   }

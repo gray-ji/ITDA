@@ -24,8 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Post(
       postId: '1',
       title: '검정색 카드지갑을 주웠어요',
-      category: Category.WALLET_MONEY_ID,
-      status: Status.STORED,
+      category: Category.walletMoneyId,
+      status: Status.stored,
       location: '서울시 마포구 홍대입구역',
       occurredFrom: '2026-11-01',
       createdAt: '2026-11-01T10:00:00',
@@ -33,8 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Post(
       postId: '2',
       title: '에어팟 케이스를 찾습니다',
-      category: Category.ELECTRONICS,
-      status: Status.LOOKING,
+      category: Category.electronics,
+      status: Status.looking,
       location: '서울시 마포구 합정역',
       occurredFrom: '2026-10-31',
       createdAt: '2026-10-31T15:00:00',
@@ -42,8 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Post(
       postId: '3',
       title: '갈색 곰돌이 인형을 주웠어요',
-      category: Category.STATIONERY_BOOKS,
-      status: Status.STORED,
+      category: Category.stationeryBooks,
+      status: Status.stored,
       location: '서울시 서대문구 연세대학교',
       occurredFrom: '2026-10-30',
       createdAt: '2026-11-01T10:00:00',
@@ -51,8 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Post(
       postId: '4',
       title: '회색 후드집업을 잃어버렸어요',
-      category: Category.FASHION,
-      status: Status.LOOKING,
+      category: Category.fashion,
+      status: Status.looking,
       location: '서울시 마포구 상수역',
       occurredFrom: '2026-10-29',
       createdAt: '2026-10-31T15:00:00',
@@ -63,9 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Post> get displayedPosts {
     return posts.where((post) {
       if (isFoundTab) {
-        return post.status == Status.STORED;
+        return post.status == Status.stored;
       } else {
-        return post.status == Status.LOOKING;
+        return post.status == Status.looking;
       }
     }).toList();
   }
