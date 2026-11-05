@@ -1,30 +1,22 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:itda_app/main.dart';
+import 'package:itda_app/app.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('ITDA 앱이 정상적으로 실행된다', (WidgetTester tester) async {
+    await tester.pumpWidget(const ITDAApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // 주웠어요 탭
+    expect(find.text('주웠어요'), findsOneWidget);
+    expect(find.text('잃어버렸어요'), findsOneWidget);
+    expect(find.text('검정색 카드지갑을 주웠어요'), findsOneWidget);
+    expect(find.text('갈색 곰돌이 인형을 주웠어요'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    // 잃어버렸어요 탭 선택
+    await tester.tap(find.text('잃어버렸어요'));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // 잃어버렸어요 탭
+    expect(find.text('에어팟 케이스를 찾습니다'), findsOneWidget);
+    expect(find.text('회색 후드집업을 잃어버렸어요'), findsOneWidget);
   });
 }

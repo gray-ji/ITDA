@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="84 385 269 240" width="269" height="240">
+  <mask id="mask-home" maskUnits="userSpaceOnUse" x="84" y="385" width="269" height="240">
+    <rect x="84" y="385" width="269" height="240" fill="#fff"/>
+    <rect x="171" y="484" width="28" height="47" rx="14" fill="#000"/>
+    <rect x="238" y="484" width="28" height="47" rx="14" fill="#000"/>
+  </mask>
+  <path fill="#adadb7" mask="url(#mask-home)" d="M190 401
+    Q218 384 246 401
+    L334 465
+    Q347 476 345 490
+    Q342 506 323 509
+    L323 583
+    Q323 616 290 617
+    L147 617
+    Q113 616 112 583
+    L112 509
+    Q95 508 92 490
+    Q92 476 103 465
+    Z"/>
+</svg>

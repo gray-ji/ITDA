@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="830 389 266 243" width="266" height="243">
+  <mask id="mask-chat" maskUnits="userSpaceOnUse" x="830" y="389" width="266" height="243">
+    <rect x="830" y="389" width="266" height="243" fill="#fff"/>
+    <rect x="914" y="480" width="28" height="46" rx="14" fill="#000"/>
+    <rect x="982" y="480" width="28" height="46" rx="14" fill="#000"/>
+  </mask>
+  <path fill="#adadb7" mask="url(#mask-chat)" d="M960 393
+    C1030 393 1075 420 1085 485
+    C1092 545 1050 604 975 604
+    C945 604 928 603 914 599
+    C895 614 880 622 866 626
+    C850 628 846 617 850 605
+    C853 595 857 585 861 574
+    C843 558 834 535 834 505
+    C834 440 880 393 960 393 Z"/>
+</svg>

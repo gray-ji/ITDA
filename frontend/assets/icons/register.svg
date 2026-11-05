@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="468 388 246 246" width="246" height="246">
+  <mask id="mask-plus" maskUnits="userSpaceOnUse" x="468" y="388" width="246" height="246">
+    <rect x="468" y="388" width="246" height="246" fill="#fff"/>
+    <rect x="572" y="446" width="38" height="132" rx="19" fill="#000"/>
+    <rect x="525" y="493" width="132" height="38" rx="19" fill="#000"/>
+  </mask>
+  <circle cx="591" cy="511" r="119" fill="#adadb7" mask="url(#mask-plus)"/>
+</svg>
