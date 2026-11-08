@@ -6,6 +6,8 @@
 .env
 .env.*
 
+# Flutter 실행용 환경 설정 (카카오 키, 서버 주소)
+frontend/env.json
 # 팀원 공유용 예시 파일은 Git에 포함
 !.env.example
 
