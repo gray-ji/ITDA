@@ -9,9 +9,11 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
-@SpringBootTest
+@SpringBootTest(properties = {
+        "jwt.secret=test-secret-test-secret-test-secret-123456"
+})
 class BackendApplicationTests {
-    
+
     @Container
     static final PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:16")
             .withDatabaseName("itda")
@@ -25,8 +27,7 @@ class BackendApplicationTests {
         registry.add("spring.datasource.password", postgres::getPassword);
     }
 
-	@Test
-	void contextLoads() {
-	}
-
+    @Test
+    void contextLoads() {
+    }
 }
